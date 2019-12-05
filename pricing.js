@@ -61,13 +61,13 @@ function calculateProductPrice(product, employee, selectedOptions) {
 
   switch (product.type) {
     case 'volLife':
-      price = calculateVolLifePrice(product, selectedOptions)
-      employerContribution = getEmployerContribution(product.employerContribution, price)
-      return formatPrice(price - employerContribution)
+      price = this.calculateVolLifePrice(product, selectedOptions)
+      employerContribution = this.getEmployerContribution(product.employerContribution, price)
+      return this.formatPrice(price - employerContribution)
     case 'ltd':
-      price = calculateLTDPrice(product, employee, selectedOptions)
-      employerContribution = getEmployerContribution(product.employerContribution, price)
-      return formatPrice(price - employerContribution)
+      price = this.calculateLTDPrice(product, employee, selectedOptions)
+      employerContribution = this.getEmployerContribution(product.employerContribution, price)
+      return this.formatPrice(price - employerContribution)
     default:
       throw new Error(`Unknown product type: ${product.type}`)
   }
