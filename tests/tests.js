@@ -75,13 +75,7 @@ describe('Pricing', () => {
 
     })
     describe('calculateProductPrice', () => {
-      let sandbox
-      let calculateProductPriceSpy
-      let formatPriceSpy
-      let getEmployerContributionSpy
-      let calculateVolLifePricePerRoleSpy
-      let calculateVolLifePriceSpy
-      let calculateLTDPriceSpy
+      let sandbox, calculateProductPriceSpy, formatPriceSpy, getEmployerContributionSpy, calculateVolLifePricePerRoleSpy, calculateVolLifePriceSpy, calculateLTDPriceSpy
 
       beforeEach(() => {
         sandbox = sinon.createSandbox()
@@ -107,6 +101,8 @@ describe('Pricing', () => {
         expect(price).to.equal(39.37)
         expect(calculateVolLifePricePerRoleSpy).to.have.callCount(1)
         expect(formatPriceSpy).to.have.callCount(1)
+        expect(getEmployerContributionSpy).to.have.callCount(1)
+        expect(calculateProductPriceSpy).to.have.callCount(1)
       })
 
       it('returns the price for a voluntary life product for an employee with a spouse', () => {
@@ -121,6 +117,7 @@ describe('Pricing', () => {
 
         expect(price).to.equal(71.09)
         expect(calculateVolLifePriceSpy).to.have.callCount(1)
+        expect(calculateVolLifePricePerRoleSpy).to.have.callCount(2)
         expect(getEmployerContributionSpy).to.have.callCount(1)
         expect(formatPriceSpy).to.have.callCount(1)
         expect(calculateProductPriceSpy).to.have.callCount(1)
