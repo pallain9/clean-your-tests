@@ -1,3 +1,5 @@
+//NO CHANGES TO CODE BELOW//
+
 function formatPrice(price) {
   return parseInt(price * 100) / 100
 }
