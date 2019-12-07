@@ -28,7 +28,7 @@ function calculateVolLifePrice(product, selectedOptions) {
   const { familyMembersToCover } = selectedOptions
 
   familyMembersToCover.forEach((role) => {
-    price += calculateVolLifePricePerRole(role, selectedOptions.coverageLevel, product.costs)
+    price += this.calculateVolLifePricePerRole(role, selectedOptions.coverageLevel, product.costs)
   })
 
   return price

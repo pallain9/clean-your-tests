@@ -106,6 +106,7 @@ describe('Pricing', () => {
 
         expect(price).to.equal(39.37)
         expect(calculateVolLifePricePerRoleSpy).to.have.callCount(1)
+        expect(formatPriceSpy).to.have.callCount(1)
       })
 
       it('returns the price for a voluntary life product for an employee with a spouse', () => {
@@ -132,7 +133,7 @@ describe('Pricing', () => {
         const price = pricing.calculateProductPrice(products.longTermDisability, employee, selectedOptions)
 
         expect(price).to.equal(22.04)
-        expect(calculateVolLifePriceSpy).to.have.callCount(1)
+        expect(calculateLTDPriceSpy).to.have.callCount(1)
         expect(getEmployerContributionSpy).to.have.callCount(1)
         expect(formatPriceSpy).to.have.callCount(1)
         expect(calculateProductPriceSpy).to.have.callCount(1)
@@ -142,9 +143,6 @@ describe('Pricing', () => {
         const unknownProduct = { type: 'vision' }
 
         expect(() => pricing.calculateProductPrice(unknownProduct, {}, {})).to.throw('Unknown product type: vision')
-        expect(calculateLTDPriceSpy).to.have.callCount(1)
-        expect(getEmployerContributionSpy).to.have.callCount(1)
-        expect(formatPriceSpy).to.have.callCount(1)
         expect(calculateProductPriceSpy).to.have.callCount(1)
       })
     })
