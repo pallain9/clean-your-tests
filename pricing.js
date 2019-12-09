@@ -59,24 +59,17 @@ function calculateLTDPrice(product, employee, selectedOptions) {
     const eeCoverage = product.coverage.find(coverage => {
       return coverage.role === 'ee'
     })
-
     const eeCost = product.costs.find(cost => {
       return cost.role === 'ee'
     })
-
     const salaryPercentage = eeCoverage.percentage / 100
-
     price += ((employee.salary * salaryPercentage) / eeCost.costDivisor) * eeCost.price
   }
-
   return price
 }
-
-
 function calculateProductPrice(product, employee, selectedOptions) {
   let price
   let employerContribution
-
   switch (product.type) {
     case 'volLife':
       price = this.calculateVolLifePrice(product, selectedOptions)
@@ -94,7 +87,6 @@ function calculateProductPrice(product, employee, selectedOptions) {
       throw new Error(`Unknown product type: ${product.type}`)
   }
 }
-
 module.exports = {
   calculateProductPrice,
   calculateVolLifePricePerRole,
