@@ -1,5 +1,3 @@
-//NO CHANGES TO CODE BELOW//
-
 function formatPrice(price) {
   return parseInt(price * 100) / 100
 }
@@ -24,7 +22,24 @@ function calculateVolLifePricePerRole(role, coverageLevel, costs) {
 
   return (eeCoverage.coverage / eeCost.costDivisor) * eeCost.price
 }
+function calculateCommuterPrice(product, selectedOptions) {
+  let price = 0
+  const { benefit } = selectedOptions
 
+  if (benefit.includes('train')) {
+    const trainBenefit = product.costs.find(cost => {
+      return cost.type === 'train'
+    })
+    price = trainBenefit.price
+  } else if (benefit.includes('parking')) {
+    const parkingBenefit = product.costs.find(cost => {
+      return cost.type === 'parking'
+    })
+    price = parkingBenefit.price
+  }
+
+  return price
+}
 function calculateVolLifePrice(product, selectedOptions) {
   let price = 0
   const { familyMembersToCover } = selectedOptions
@@ -57,6 +72,7 @@ function calculateLTDPrice(product, employee, selectedOptions) {
   return price
 }
 
+
 function calculateProductPrice(product, employee, selectedOptions) {
   let price
   let employerContribution
@@ -68,6 +84,10 @@ function calculateProductPrice(product, employee, selectedOptions) {
       return this.formatPrice(price - employerContribution)
     case 'ltd':
       price = this.calculateLTDPrice(product, employee, selectedOptions)
+      employerContribution = this.getEmployerContribution(product.employerContribution, price)
+      return this.formatPrice(price - employerContribution)
+    case 'commuter':
+      price = this.calculateCommuterPrice(product, employee, selectedOptions)
       employerContribution = this.getEmployerContribution(product.employerContribution, price)
       return this.formatPrice(price - employerContribution)
     default:
@@ -82,4 +102,5 @@ module.exports = {
   getEmployerContribution,
   formatPrice,
   calculateLTDPrice,
+  calculateCommuterPrice
 }
